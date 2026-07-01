@@ -667,3 +667,62 @@ hr {
 
 .ach-info h3 { margin: 0 0 0.25rem 0; font-size: 1.2rem; }
 .ach-info p { margin: 0; font-size: 0.95rem; opacity: 0.8; }
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE REBOOT (For Screens 768px wide and below)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* 1. Unstack the Grid: Force portfolio tiles into a clean single column */
+    .artifacts-grid, 
+    .achievements-grid {
+        grid-template-columns: 1fr !important;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    /* 2. Scale the Main Structure: Let the main container hug the phone edges */
+    main {
+        padding: 1rem;
+        margin: 0.5rem auto;
+        width: 95%;
+    }
+
+    /* 3. Header & Navigation: Stack your links neatly below your logo */
+    header nav {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .nav-links {
+        justify-content: center;
+        padding: 0;
+        gap: 1.2rem;
+    }
+
+    /* 4. Project Pop-up Window: Make it take full width so content is readable */
+    .detail-modal-content {
+        width: 95% !important;
+        margin: 10% auto;
+        padding: 1rem;
+    }
+
+    /* 5. Fluid Typography: Shrink titles slightly so they don't break lines awkwardly */
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    
+    /* 6. Fix Achievements: Make rows stack vertically if the phone is narrow */
+    .achievement-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+        padding: 1.25rem;
+    }
+    
+    /* 7. Allow Iframe Content to Scroll Natively */
+    .detail-media-box iframe {
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile Safari */
+    }
+}
