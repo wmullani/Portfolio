@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance Over Time</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <!-- Header and Navigation -->
+  <div class="header-bar">
+    Consistency Across Tournaments 
+    <i class="fa-solid fa-location-crosshairs icon"></i>
+  </div>
+
+  <nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="pokemon.html" class="active">By Pokémon</a></li> <!-- Current page -->
+          </ul>
+        </div>
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="usagerates.html">Usage Rates</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="placements.html">Highest Placements</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>  
+
+  <section>
+    <h1>Performance Over Time</h1>
+    
+    <!-- Section for Pokemon Graphs -->
+    <h2>Incineroar's Highest Placings at Tournaments</h2>
+    <div id="incineroar_graph" class="graph-container"></div>
+
+    <h2>Flutter Mane's Highest Placings at Tournaments</h2>
+    <div id="fluttermane_graph" class="graph-container"></div>
+
+    <h2>Rillaboom's Highest Placings at Tournaments</h2>
+    <div id="rillaboom_graph" class="graph-container"></div>
+
+    <h2>Urshifu's Highest Placings at Tournaments</h2>
+    <div id="urshifu_graph" class="graph-container"></div>
+
+    <h2>Ogerpon's Highest Placings at Tournaments</h2>
+    <div id="ogerpon_graph" class="graph-container"></div>
+
+    <h2>Tornadus's Highest Placings at Tournaments</h2>
+    <div id="tornadus_graph" class="graph-container"></div>
+
+    <h2>Amoongus's Highest Placings at Tournaments</h2>
+    <div id="amoongus_graph" class="graph-container"></div>
+
+  </section>
+
+  <script>
+    // Set dimensions and margins of the graphs
+    var margin = {top: 10, right: 30, bottom: 50, left: 60},
+        width = 700,  
+        height = 300; 
+
+    // Function to create a responsive graph
+    function createGraph(data, color, divId) {
+      // Append the SVG object to the specified div
+      var svg = d3.select(divId)
+        .append("svg")
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .attr("preserveAspectRatio", "xMidYMid meet")
+        .classed("responsive-svg", true);
+
+      var chart = svg.append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+      // X axis
+      var x = d3.scaleBand()
+        .domain(data.map(function(d) { return d.tournament; }))
+        .range([0, width])
+        .padding(0.2);
+      chart.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("transform", "translate(0,5)");
+
+      // X axis label
+      chart.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 10)
+        .text("Tournament (Location)");
+
+      // Y axis
+      var y = d3.scaleLinear()
+        .domain([18, 1])
+        .range([height, 0]);
+      chart.append("g")
+        .call(d3.axisLeft(y).ticks(6));
+
+      // Y axis label
+      chart.append("text")
+        .attr("text-anchor", "middle")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -height / 2)
+        .attr("y", -margin.left + 20)
+        .text("Highest Placing");
+
+      // Line connecting points
+      chart.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", color)
+        .attr("stroke-width", 1.5)
+        .attr("d", d3.line()
+          .x(function(d) { return x(d.tournament) + x.bandwidth() / 2; })
+          .y(function(d) { return y(d.placing); })
+        );
+
+      // Circles for data points
+      chart.append("g")
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) { return x(d.tournament) + x.bandwidth() / 2; })
+        .attr("cy", function(d) { return y(d.placing); })
+        .attr("r", 5)
+        .attr("fill", color);
+    }
+
+    // data
+    createGraph([
+      {tournament: "Charlotte", placing: 1},
+      {tournament: "Orlando", placing: 1},
+      {tournament: "Portland", placing: 3},
+      {tournament: "Liverpool", placing: 1},
+      {tournament: "Knoxville", placing: 1},
+      {tournament: "Dortmund", placing: 1},
+      {tournament: "Utrecht", placing: 8},
+      {tournament: "Vancouver", placing: 2},
+      {tournament: "Indianapolis", placing: 1},
+      {tournament: "Stockholm", placing: 3},
+      {tournament: "Los Angeles", placing: 1},
+      {tournament: "Bologna", placing: 3}
+    ], "#b3697a", "#incineroar_graph");
+
+    createGraph([
+      {tournament: "Charlotte", placing: 1},
+      {tournament: "Orlando", placing: 1},
+      {tournament: "Portland", placing: 1},
+      {tournament: "Liverpool", placing: 1},
+      {tournament: "Knoxville", placing: 2},
+      {tournament: "Dortmund", placing: 1},
+      {tournament: "Utrecht", placing: 2},
+      {tournament: "Vancouver", placing: 1},
+      {tournament: "Indianapolis", placing: 2},
+      {tournament: "Stockholm", placing: 2},
+      {tournament: "Los Angeles", placing: 6},
+      {tournament: "Bologna", placing: 6}
+    ], "#76b5c5", "#fluttermane_graph");
+
+    createGraph([
+      {tournament: "Charlotte", placing: 1},
+      {tournament: "Orlando", placing: 2},
+      {tournament: "Portland", placing: 11},
+      {tournament: "Liverpool", placing: 1},
+      {tournament: "Knoxville", placing: 2},
+      {tournament: "Dortmund", placing: 2},
+      {tournament: "Utrecht", placing: 2},
+      {tournament: "Vancouver", placing: 1},
+      {tournament: "Indianapolis", placing: 7},
+      {tournament: "Stockholm", placing: 1},
+      {tournament: "Los Angeles", placing: 1},
+      {tournament: "Bologna", placing: 1}
+    ], "#5ebc28", "#rillaboom_graph");
+
+    createGraph([
+      {tournament: "Charlotte", placing: 1},
+      {tournament: "Orlando", placing: 1},
+      {tournament: "Portland", placing: 5},
+      {tournament: "Liverpool", placing: 1},
+      {tournament: "Knoxville", placing: 1},
+      {tournament: "Dortmund", placing: 1},
+      {tournament: "Utrecht", placing: 2},
+      {tournament: "Vancouver", placing: 2},
+      {tournament: "Indianapolis", placing: 2},
+      {tournament: "Stockholm", placing: 3},
+      {tournament: "Los Angeles", placing: 1},
+      {tournament: "Bologna", placing: 2}
+    ], "#494c4e", "#urshifu_graph");
+
+    createGraph([
+      {tournament: "Charlotte", placing: 1},
+      {tournament: "Orlando", placing: 2},
+      {tournament: "Portland", placing: 1},
+      {tournament: "Liverpool", placing: 1},
+      {tournament: "Knoxville", placing: 1},
+      {tournament: "Dortmund", placing: 1},
+      {tournament: "Utrecht", placing: 1},
+      {tournament: "Vancouver", placing: 1},
+      {tournament: "Indianapolis", placing: 1},
+      {tournament: "Stockholm", placing: 2},
+      {tournament: "Los Angeles", placing: 11},
+      {tournament: "Bologna", placing: 5}
+    ], "#53ca83", "#ogerpon_graph");
+
+    createGraph([
+      {tournament: "Charlotte", placing: 2},
+      {tournament: "Orlando", placing: 1},
+      {tournament: "Portland", placing: 3},
+      {tournament: "Liverpool", placing: 3},
+      {tournament: "Knoxville", placing: 1},
+      {tournament: "Dortmund", placing: 5},
+      {tournament: "Utrecht", placing: 4},
+      {tournament: "Vancouver", placing: 7},
+      {tournament: "Indianapolis", placing: 2},
+      {tournament: "Stockholm", placing: 2},
+      {tournament: "Los Angeles", placing: 1},
+      {tournament: "Bologna", placing: 1}
+    ], "#9229f3", "#tornadus_graph");
+
+    createGraph([
+      {tournament: "Charlotte", placing: 8},
+      {tournament: "Orlando", placing: 1},
+      {tournament: "Portland", placing: 6},
+      {tournament: "Liverpool", placing: 14},
+      {tournament: "Knoxville", placing: 3},
+      {tournament: "Dortmund", placing: 7},
+      {tournament: "Utrecht", placing: 17},
+      {tournament: "Vancouver", placing: 3},
+      {tournament: "Indianapolis", placing: 2},
+      {tournament: "Stockholm", placing: 2},
+      {tournament: "Los Angeles", placing: 2},
+      {tournament: "Bologna", placing: 18}
+    ], "#c2bab9", "#amoongus_graph");
+    
+  </script>
+
+</body>
+</html>

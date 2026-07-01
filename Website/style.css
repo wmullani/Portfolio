@@ -1,0 +1,155 @@
+/* Basic styling for all pages */
+.header-bar {
+  background-color: #E10600; /* Red color */
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav {
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+/* Hover effect for all navigation links */
+nav ul li a:hover {
+  background-color: #575757;
+  border-radius: 5px;
+}
+
+/* Active link styling */
+nav a.active {
+  background-color: white;
+  color: black !important;
+}
+
+/* Active link - for the page the user is on */
+nav ul li a.active {
+  background-color: white; /* White background for the active page */
+  color: black; /* Black text for the active page */
+  border-radius: 5px; /* Optional, add rounded corners */
+}
+
+/* Add CSS to control the maximum width of the graph containers */
+.graph-container {
+  max-width: 700px; 
+  margin: 0 auto;   
+}
+
+section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+section:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+section:nth-child(even) {
+  background-color: #e9ecef;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  margin: 20px 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Centering the table container */
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%; /* Ensure the container doesn't overflow */
+  overflow-x: auto; /* Allow horizontal scrolling if necessary */
+}
+
+/* Ensuring table doesn't overflow and remains responsive */
+table {
+  width: 100%;
+  max-width: 100%;  /* Allow it to adapt to the container */
+  border-collapse: collapse;
+  table-layout: auto;  /* Allow table columns to resize based on content */
+}
+
+/* Handling table columns for smaller screens */
+th, td {
+  padding: 8px 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  word-wrap: break-word; /* Make sure text wraps within cells */
+}
+
+/* Header styling */
+th {
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+/* Add responsive design for very small screens */
+@media (max-width: 600px) {
+  .table-container {
+    padding: 10px; /* Reduce padding on small screens */
+  }
+
+  table {
+    font-size: 14px;  /* Smaller text on smaller screens */
+  }
+
+  th, td {
+    padding: 6px 10px;  /* Reduce padding for better fit */
+  }
+}
+
+
+
+/* Default style for Awesome Font icons */
+.icon {
+  transition: transform 0.3s ease; /* Smooth animation effect */
+  cursor: pointer; /* Makes it clear the icon is interactive */
+}
+
+/* Hover effect for Awesome Font icons */
+.icon:hover {
+  transform: scale(1.2); /* Increases size to 120% */
+}
+
+/* Specific styling for charts */
+.chart-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+}

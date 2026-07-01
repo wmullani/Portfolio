@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Pokémon Data</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <!-- Header and Navigation -->
+  <div class="header-bar">
+    Pokémon 2024 VGC Data Visualization
+  <i class="fa-solid fa-gamepad icon"></i>
+  </div>
+
+  <nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="index.html" class="active">Home</a></li> <!-- Home link with active class -->
+          </ul>
+        </div>
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="pokemon.html">By Pokémon</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="usagerates.html">Usage Rates</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <ul class="list-unstyled">
+            <li><a href="placements.html">Highest Placements</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <h1>Competitive Pokémon Data</h1>
+    <p>The topic for my mobile data narrative is Pokémon—specifically data about the results of several regional level tournaments and events for the official competitive format (VGC) of Pokémon in 2024. I selected this topic because Pokémon is something I am knowledgeable and passionate about, and its competitive format had plenty of data that would lend itself well to this type of project. Beyond that, when it comes to VGC, the exact guidelines for which specific Pokémon can be used in tournaments change frequently, but within each regulation there are individual Pokémon and strategies that quickly become dominant. Among them, Incineroar is a Pokémon that has stood the test of time, being extremely prevalent in nearly every regulation since its introduction. There are also many newer Pokemon making a name for themselves in more recent regulations, so I decided to see for myself just how often these Pokémon were being used and how people were using them successfully by gathering data from various tournaments held throughout 2024. Specifically, “Victory Road – Pokémon VGC coverage and resources” records the teams of competitors at official tournaments and uploads them in detail, including the composition of the teams as well as how they performed at the tournament, making it the perfect resource for me to gather data from. 
+    </p>
+    <!-- Embed YouTube Video -->
+    <div class="video-container">
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/hyJ52iwByBg?si=fYGgDEeCQG8wQNiX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p>
+     A trend that can be observed in this data is that when a specific way of using a Pokémon (item, move set, etc.) is effective, it does not tend to change. For example, while Incineroar’s usage rate spanned anywhere from 28.50% to 61.58% across the tournaments studied, there was an overwhelming overlap in the held items, tera types and move sets—out of a total of 680 individual Incineroars studied, the move Fake Out was one of the moves on the move set of every single one. To reiterate, the data I gathered demonstrated that while an individual Pokémon’s usage rate will vary greatly from one tournament to the next, the way that that Pokémon is used tends to be consistent, as players are very good at discerning the best role that a Pokémon can play and how to maximize its effectiveness in that role. 
+     Looking at the performance over time, we can also see that Incineroar is not the only Pokémon with consistently impressive results. Flutter Mane placed 1st or 2nd in all but two of the tournaments studied, and Urshifu never placed lower than 5th. In terms of the highest number of champion placements, Ogerpon takes the cake at 8 different 1st place finishes across the 12 tournaments studied. Depending on which criteria you value the most, an argument could be made for any of these Pokémon as the king of modern VGC, but regardless, all of them consistently performed very well. Of course, it’s equally important to look at what percentage of teams these Pokémon are being used on at each tournament. Looking at the usage data, Ogerpon begins to stand out even more, being used on a higher percentage of teams than any other Pokémon studied for 6 of the 12 tournaments, reaching as high as 71.88% usage on the teams of the Knoxville Regionals competitors. From this data we can surmise that, while all the Pokémon studied performed consistently well, Ogerpon stood out in the minds of competitive players as a vital member of the team more often than any other. The filters on the data table are the perfect way to see the usage and the actual success of a Pokémon in one place. If we filter to see only performances that included at least 50% usage rate for the tournament, we see that Ogerpon once again shines through appearing with this usage rate more than any other Pokémon, not only having the most 1st place finishes of any Pokémon with this usage rate but also having the largest presence in the top cut of each tournament (top 8 players). When all the data from these tournaments is viewed together, we can conclude that Ogerpon stood out from the rest as the Pokémon that was most widely used with the best results across each tournament. 
+    </p>
+    <div>
+      <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/55481807-497e-460b-8b1e-62db30eafc08/de34y32-b8ce94ae-ffb2-4ee2-97b1-5cce54f56ff4.png/v1/fill/w_1280,h_512,q_80,strp/gengar_vs_nidorino__leaf_green_fire_red_version__by_vidrovov_de34y32-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTEyIiwicGF0aCI6IlwvZlwvNTU0ODE4MDctNDk3ZS00NjBiLThiMWUtNjJkYjMwZWFmYzA4XC9kZTM0eTMyLWI4Y2U5NGFlLWZmYjItNGVlMi05N2IxLTVjY2U1NGY1NmZmNC5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.OwgwuQwCpR2cOSbQqYlubl0GIF8L-Nb1Nfy1o7EQlzA" 
+     alt="Gengar vs Nidorino battle scene" 
+     class="img-fluid">
+    </div>
+    <p>
+      Of course, while VGC was the perfect format of Pokémon to collect data on, it’s something I’ve only recently grown interested in. The very first video game I ever owned was Pokémon Soul Silver on the Nintendo DS, so it’s no exaggeration to say that Pokémon, more than any other individual game or franchise, is likely what set me down the path I’m on today, studying to one day work on a game or series of games that I love as much as Pokémon. The world building and mechanics of the game providing such a wide variety of Pokémon from which to build your team with—1,025 at the time of this project—is a huge part of what makes the games so engaging for casual and competitive players alike. Everyone can choose their favorites, and no one can ever be truly prepared to counter every possible Pokémon. But besides Pokémon themselves, the moves, abilities and items that you can use continue to grow as well, and as the series has undergone such a stark expansion from the original 151 Pokémon, the competitive scene is equally ever-changing. Some Pokémon present since the very first games have only just now found a competitive scene that allows them to shine in the 9th generation of games, and while this project only examines data from 7 certain Pokémon, part of the appeal for me in doing the research was getting a chance to see the sheer variety of team compositions and creative strategies that experienced competitive players have come up with for the tournaments throughout 2024. Ultimately, Pokémon is a fantastic franchise for casual and competitive players alike, and I was glad for this opportunity to collect and visualize data from my personal favorite game series.
+    </p>
+
+  </section>
+  
+</body>
+</html>
