@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" onclick="switchPage('achievements')">
+                <img src="WM_Logo.png" alt="My Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#" id="nav-home" onclick="switchPage('home')" class="active">Home</a></li>
+                <li><a href="#" id="nav-artifacts" onclick="switchPage('artifacts')">Artifacts</a></li>
+                <li><a href="#" id="nav-resume" onclick="switchPage('resume')">Resume</a></li>
+                
+                <li class="theme-dropdown">
+                    <a href="#" class="theme-link" onclick="return false;">Themes ▾</a>
+                    <div class="dropdown-content">
+                        <button onclick="setTheme('default')">Default Dark</button>
+                        <button onclick="setTheme('cyberpunk')">Cyberpunk Neon</button>
+                        <button onclick="setTheme('forest')">Cozy Forest</button>
+                        <button onclick="setTheme('ocean')">Deep Ocean</button>
+                        <button onclick="setTheme('light')">Minimalist Light</button>
+                        <button onclick="setTheme('arcade')">Retro Arcade</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+    </main>
+
+    <footer>
+        <p>&copy; 2026 My Portfolio. Built with VS Code.</p>
+    </footer>
+
+
+    <template id="page-home">
+        <div class="home-grid">
+            
+            <div class="home-text">
+                <h1>Welcome to My Portfolio</h1>
+                <hr>
+                <p>My name is Wyatt Mullani! I'm a passionate game designer and developer who bridges quality and creativity to create immersive experiences. I don't just aim to make games, I aim to create worlds.</p>
+                <br>
+                <p>Take a look around my portfolio to check out my work, and feel free to get in touch! By the way, black not your vibe? Customize your viewing experience by clicking the "Themes" button!</p>
+            </div>
+            
+            <div class="home-image-container">
+                <img src="Wyatt.jpg" alt="My Headshot" class="home-headshot">
+            </div>
+
+        </div>
+    </template>
+
+    <template id="page-artifacts">
+        <section class="artifacts-container">
+            <h1>My Games & Projects</h1>
+            <hr class="section-header-line">
+            
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+                <button class="filter-btn" onclick="filterProjects('programming', this)">Programming</button>
+                <button class="filter-btn" onclick="filterProjects('art', this)">Art</button>
+                <button class="filter-btn" onclick="filterProjects('vr', this)">VR</button>
+                <button class="filter-btn" onclick="filterProjects('ui-ux', this)">UI/UX</button>
+                <button class="filter-btn" onclick="filterProjects('multiplayer', this)">Multiplayer</button>
+                <button class="filter-btn" onclick="filterProjects('web-dev', this)">Web Development</button>
+                <button class="filter-btn" onclick="filterProjects('collaborative', this)">Collaborative</button>
+                <button class="filter-btn" onclick="filterProjects('individual', this)">Individual</button>
+            </div>
+
+            <div id="project-grid" class="project-grid">
+            </div>
+        </section>
+    </template>
+
+    <template id="page-project-detail">
+        <div class="detail-container">
+            <button class="back-btn" onclick="switchPage('artifacts')">← Back to Projects</button>
+            <h1 id="detail-title">Project Title</h1>
+            <div id="detail-tags" class="detail-tags"></div>
+            <hr class="section-header-line">
+            
+            <div class="detail-content-layout">
+                <div class="detail-media-box">
+                    <p class="placeholder-text">[ Media / Gameplay Trailer / Image Container ]</p>
+                </div>
+                <div class="detail-description">
+                    <h2>Project Overview</h2>
+                    <p id="detail-text">Detailed writeup, post-mortem notes, and your role in the project will dynamically display here.</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="page-resume">
+        <div class="resume-grid">
+            
+            <div class="resume-left">
+                <section class="resume-section">
+                    <h2>Education</h2>
+                    <hr>
+                    <div class="resume-item">
+                        <p><strong>Bachelor of Science | Games, Interactive Media & Mobile Technology</strong></p>
+                        <p class="resume-sub">Boise State University | 2022 - 2026</p>
+                        <p>This degree was designed to teach all aspects of game development, from storyboarding, to programming to digital art. With a focus on how to best collaborate on large projects of all kinds, I'm confident I can thrive as part of your team too!</p>
+                    </div>
+                </section>
+
+                <section class="resume-section">
+                    <h2>Proficiencies</h2>
+                    <hr>
+                    <div class="resume-item">
+                        <p><strong>Engines & Tools:</strong> Unity, Unreal Engine, VS Code, Git, Photoshop, Autodesk Maya</p>
+                        <p><strong>Languages:</strong> C#, HTML/CSS, JavaScript</p>
+                        <p><strong>Skills:</strong> Level/Character Design, Programming, Rapid Prototyping, VR Development</p>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="resume-right">
+                <div class="contact-card">
+                    <h2>Contact Information</h2>
+                    <hr>
+                    <p><strong>Email:</strong> <a href="mailto:wyattmullani@gmail.com">wyattmullani@gmail.com</a></p>
+                    <p><strong>Phone:</strong> (208) 869-3445</p>
+                    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/wyatt-mullani/" target="_blank">https://www.linkedin.com/in/wyatt-mullani/</a></p>
+                </div>
+            </div>
+
+        </div>
+    </template>
+
+    <template id="page-achievements">
+        <section class="achievements-container">
+            <h1>Unlocked Trophies</h1>
+            <p style="font-style: italic; margin-bottom: 1.5rem; opacity: 0.8;">Explore the portfolio to unlock hidden secrets!</p>
+            <hr class="section-header-line">
+            
+            <div class="achievements-grid">
+                <div class="achievement-row" id="ach-view-artifacts">
+                    <div class="ach-badge">🎨</div>
+                    <div class="ach-info">
+                        <h3>The Curator</h3>
+                        <p>Visited the Artifacts library.</p>
+                    </div>
+                </div>
+                <div class="achievement-row" id="ach-view-resume">
+                    <div class="ach-badge">📄</div>
+                    <div class="ach-info">
+                        <h3>Background Check</h3>
+                        <p>Reviewed the professional resume credentials.</p>
+                    </div>
+                </div>
+                <div class="achievement-row" id="ach-change-theme">
+                    <div class="ach-badge">🌈</div>
+                    <div class="ach-info">
+                        <h3>Interior Decorator</h3>
+                        <p>Customized the website theme.</p>
+                    </div>
+                </div>
+                <div class="achievement-row" id="ach-open-details">
+                    <div class="ach-badge">🔍</div>
+                    <div class="ach-info">
+                        <h3>Deep Dive</h3>
+                        <p>Opened up a specific project case-study for a closer look.</p>
+                    </div>
+                </div>
+                <div class="achievement-row" id="ach-click-logo">
+                    <div class="ach-badge">🕶️</div>
+                    <div class="ach-info">
+                        <h3>Secret Agent</h3>
+                        <p>Discovered the hidden trophy room link behind the main logo.</p>
+                    </div>
+                </div>
+                <div class="achievement-row" id="ach-use-filter">
+                    <div class="ach-badge">⚡</div>
+                    <div class="ach-info">
+                        <h3>Targeted Search</h3>
+                        <p>Used the tag filter buttons to sort through my artifacts.</p>
+                    </div>
+                </div>
+                <div class="achievement-row" id="ach-completionist" style="border: 2px dashed #ffd700;">
+                    <div class="ach-badge" style="background: rgba(255, 215, 0, 0.1);">🏆</div>
+                    <div class="ach-info">
+                        <h3 style="color: #ffd700;">Completionist</h3>
+                        <p>Unlock every single achievement in the portfolio. Thank you for exploring my work!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <div id="achievement-toast" class="achievement-toast">
+        <div class="toast-icon">🏆</div>
+        <div class="toast-text">
+            <span class="toast-label">ACHIEVEMENT UNLOCKED!</span>
+            <h4 id="toast-title">Achievement Name</h4>
+        </div>
+    </div>
+
+    <script>
+        // --- 14 PROJECTS DATA ENGINE ---
+        const projectsData = [
+            { id: "first-game", title: "My First Game", tags: ["programming", "individual"], image: "images/thumbnails/MyFirstGame_Thumbnail.png", description: "This was the first game I ever made! I had a very imited timeframe with which to come up with an idea for a platformer, draw any characters and tiles I would need, and program multiple levels in Unity. I didn't want to waste a lot of time coming up with ideas, so I decided to make a knock-off Mario game since I knew exactly what I would need in terms of design and mechanics. I learned how to program movement, a basic inventory for power ups, a score counter, and a basic death system for the game. In addition to being my first ever game project, it was my first time making a game trailer too. I've come a long way since this project, but it taught me a lot of foundational skills!", mediaType: "iframe", mediaSource: "games/Super-Jump-Guy/index.html" },
+            { id: "balloony-loon", title: "Balloony Loon", tags: ["programming", "ui-ux", "collaborative", "multiplayer"], image: "images/thumbnails/BalloonyLoon_Thumbnail.png", description: "This was a collaborative project, between myself and two peers, to create an online multiplayer game using Unreal Engine. The premise of the game is dogfighting in hotair balloons. You have to carefully manage the controls of the balloon, adding heat to raise the balloon higher while steering to avoid enemy attacks and firing back! I had several roles for this project. On the programming side, I was responsible for the movement of the ship, the harpoon attack mechanic and health system, ensuring that any changes to the health or movement of one player would be immediately reflected for the other players as well. Additionally, I did the sound design and user interface design. This project taught me how to build within Unreal Engine--especially how to navigate it's nodular programming!", mediaType: "video", mediaSource: "videos/BalloonyLoon.mp4" },
+            { id: "dumpster-divas", title: "Dumpster Divas", tags: ["programming", "collaborative", "multiplayer"], image: "images/thumbnails/DumpsterDivas_Thumbnail.png", description: "This was a collaborative project between myself and three other students. It was my first time making a local multiplayer experience in Unity and was inspired by puzzle games such as Fireboy and Watergirl--where two players must work together to reach the end of a level utilizing slightly different abilities. In this case, the premise of the game is a Rat and a Raccoon working together to collect bits of trash and scraps of food. One player, the nimble Rat, is able to fit in tight spaces and jump to reach trash in tricky spots, while the plump Raccoon is able to scare off smaller foes that might harm the Rat and push objects around to create platforms for the Rat. Simply collect all the scraps in the level to win! For this project I was responsible for the programming of the simultaneous movement of each player and their respective jumping/pushing abilities.", mediaType: "image", mediaSource: "images/thumbnails/DumpsterDivas_Thumbnail.png" },
+            { id: "individual-project", title: "Individual Project", tags: ["individual", "programming", "art", "ui-ux"], image: "images/thumbnails/IndividualProject_Thumbnail.png", description: "This was arguably the biggest academic project I took on. Over the course of one year I had to build a game from the ground up--I came up with the idea for the game: chess from the perspective of a pawn. What would that look like? A full blown war between kingdoms! But I didn't just want to make 3D chess, I wanted to tell the story of a medic who heals not only his fallen allies but the rift between the two kingdoms, and ends the war for good. Then I had to program the mechanics--basic WASD movement with mouse-controlled camera and left click to heal. Waves of pawns spawn from both ends and, upon clashing, fall to the ground. If a pawn makes it to the opposite end of the board, it damages that kingdom. Enemies spawn slightly more often than allies, but for every five fallen allies you heal, an additional wave of allies is summoned to tip the scales back in your favor. The game gets progressively more difficult with each level and even has a secret ending, but the idea is simple--heal to win! Of course, I had to then model and animate the pawns using Autodesk Maya, and then texture them with Substance Painter. The UI, VFX and SFX (including background music for the levels) were also made by me. I also had to go through multiple rounds of user testing to figure out if the controls of the game were intuitive, if the UI was clear and helpful, and if the difficulty needed adjusting. This project ultimately gave me experience with the full pipeline of game development from the very start to the very end, and strengthened each different skill I needed to get there.", mediaType: "iframe", mediaSource: "games/Piece-Protector/index.html" },
+            { id: "water-bending", title: "Water Bending Simulator", tags: ["individual", "vr", "programming"], image: "images/thumbnails/WaterBendingSimulator_Thumbnail.png", description: "This was my first experience developing for VR but I was given the freedom to create any experience so long as it could provide around 5-minutes of content. While rough around the edges, I believe I was able to create a unique and interesting experience--developed for the Meta Quest 3 over the course of 3 weeks, this project was meant to simulate the act of Water Bending from the series Avatar: The Last Airbender. To accomplish this, hand tracking is used rather than controllers, and the user is able to summon a water bubble from the pool in front of them which follows their movements. Certain movement patterns trigger certain animations to give the user the impression that they can manipulate the water with such actions as causing a whirlpool or an icicle blast!", mediaType: "video", mediaSource: "videos/WaterBender.mp4" },
+            { id: "bossfight", title: "Boss Fight", tags: ["individual", "programming"], image: "images/thumbnails/BossFight_Thumbnail.png", description: "This was an individual project done over the course of a few weeks, the aim of which was to create a boss fight using state machines in Unity. I wanted something other than a gray cube but didn't have time to model anything, so I made a Snowman monster out of the basic shapes in Unity's editor as the boss. The fight has a few distinct phases (different states for the boss to enter). First, the boss shoots snowballs at you from its hands, which are relatively easy to avoid and don't do much damage if you're it. After taking about a third of it's health by firing snowballs of your own with the spacebar, the Snowmaster switches to dropping smaller snowman henchmen, each of which can fire their own snowballs at the player, but who can also be defeated quickly if targeted. Finally, with one third of its health remaining, the Snowmaster switches to dropping giant snowballs which do huge damage if they touch you, and explode into an expanding, bullet-hell pattern of smaller snowballs if they hit the ground, forcing the player to be aware of their surroundings at all times. Through this project I learned both the mechanics of using state machines as well as what actually makes for a fun boss fight in a game!", mediaType: "video", mediaSource: "videos/BossFight.mp4" },
+            { id: "pokemon-fangame", title: "Pokemon Fangame", tags: ["individual", "programming", "art", "ui-ux"], image: "images/thumbnails/PokemonFangame_Thumbnail.png", description: "This is a Work In Progress! I have always loved playing Pokemon games--official titles as well as passion projects made by fans. I decided I'd make my own inspired by particular Pokemon fan games such as Pokemon Reborn and Pokemon Insurgence. It will be a fully developed game with original characters in an original region, as well as some custom mega evolutions and regional variants. The general mechanics and structure, though, will be those of any classic Pokemon game--catching wild Pokemon, battling Gyms and an evil team, and becoming the very best! Currently I have implemented the overworld movement, wild encounters and the corresponding battle system, but there is still much to be done before a playable demo can be released. ", mediaType: "image", mediaSource: "images/ImageArtifacts/PokemonFangame_Artifact.png" },
+            { id: "data-narrative", title: "Data Narrative Website", tags: ["individual", "web-dev"], image: "images/thumbnails/DataNarrativeWebsite_Thumbnail.png", description: "This website was made as a Mobile Data Narrative, meant to practice and demonstrate various ways to visualize data. I chose to gather data about the official format of competitive Pokemon battling, and themed the website accordingly to look like a pokeball. The website shows usage data about Pokemon, their moves and held items, and their success at various tournaments. This project taught me how to create reactive websites that look good regardless of screen size, various methods of data visualization via javascript, and more!", mediaType: "iframe", mediaSource: "Website/index.html" },
+            { id: "first-website", title: "My First Website", tags: ["individual", "web-dev"], image: "images/thumbnails/MyFirstWebsite_Thumbnail.png", description: "This was the first website I ever made! This project gradually taught me how to use HTML to structure a website, CSS to style it, and JavaScript to enable certain functionalities such as dynamically changing the color theme of the website.", mediaType: "video", mediaSource: "videos/FirstWebsite.mp4" },
+            { id: "ux-redesign", title: "UX Redesign", tags: ["individual", "ui-ux", "art"], image: "images/thumbnails/UXRedesign_Thumbnail.png", description: "This was an individual project in which I was tasked to take a specific task which I found unintuitive in some app or interface, and redesign it to have a better UI. The task I chose was acquiring custom profile icons for user profiles on the Nintendo Switch. There is no way to do this from the profile customization screen--instead you have to open your online account to obtain and use custom profile icons, which confused me for a long time. So, I redesigned this UI by drawing a low fidelity, paper prototype of an additional workflow that I thought would make more sense, and conducting user research to confirm before adjusting and moving on. I then made a basic, still relatively low fidelity version in Photoshop and conducted an additional round of user testing before ultimately making a high fidelity version of the revised workflow option for acquiring and using custom profile icons on the Nintendo Switch.", mediaType: "slideshow", mediaSource: ["images/ImageArtifacts/UX/Prototype/1.jpeg","images/ImageArtifacts/UX/Prototype/2.jpeg","images/ImageArtifacts/UX/Prototype/3.jpeg","images/ImageArtifacts/UX/Prototype/4.jpeg","images/ImageArtifacts/UX/Prototype/5.jpeg","images/ImageArtifacts/UX/Prototype/6.jpeg","images/ImageArtifacts/UX/Prototype/7.jpeg","images/ImageArtifacts/UX/Prototype/8.jpeg","images/ImageArtifacts/UX/Prototype/9.jpeg","images/ImageArtifacts/UX/Prototype/1.png","images/ImageArtifacts/UX/Prototype/2.png","images/ImageArtifacts/UX/Prototype/3.png","images/ImageArtifacts/UX/Prototype/4.png","images/ImageArtifacts/UX/Prototype/5.png","images/ImageArtifacts/UX/Prototype/6.png","images/ImageArtifacts/UX/Prototype/7.png", "images/ImageArtifacts/UX/Prototype/8.png", "images/ImageArtifacts/UX/Prototype/9.png", "images/ImageArtifacts/UX/HiFi/1.png", "images/ImageArtifacts/UX/HiFi/2.png", "images/ImageArtifacts/UX/HiFi/3.png", "images/ImageArtifacts/UX/HiFi/4.png", "images/ImageArtifacts/UX/HiFi/5.png", "images/ImageArtifacts/UX/HiFi/6.png", "images/ImageArtifacts/UX/HiFi/7.png", "images/ImageArtifacts/UX/HiFi/8.png", "images/ImageArtifacts/UX/HiFi/9.png"] },
+            { id: "photoshop-project", title: "Photoshop Project", tags: ["individual", "art"], image: "images/thumbnails/PhotoshopProject_Thumbnail.png", description: "This was an indivudal project that required us to take a recognizable building or landmark and draw it in photoshop with the addition of a monster or something that shouldn't be there, changing the scene in some way. I decided to add Articuno, (a Pokemon,) flying overhead and summoning an eerie mist over the scene, also causing the formation of small icicles on the building. This project taught me how to use various tools in Photoshop, and got me much more comfortable using it in general.", mediaType: "image", mediaSource: "images/thumbnails/PhotoshopProject_Thumbnail.png" },
+            { id: "interactive-comic", title: "Interactive Comic", tags: ["collaborative", "art"], image: "images/thumbnails/InteractiveComic_Thumbnail.png", description: "This was a collaborative project between myself and four others, over the span of about 2 months. We were assigned the theme of quantum mechanics, and then told to create a comic book in Unity that helped explain the theme to the reader through interactivity. We decided to go with a superhero comic, and give the protagonist, Probabella, quantum mechanics-based superpowers. Specifically, she has the powers of Superposition (portrayed similarly to teleportation or a shadow clone-like ability), Quantum Entanglement (forcing an inversion of her own movements onto another person or thing), and Quantum Tunneling (allowing her to instantly pass through thin barriers). There were three minigames the reader could play interspersed throughout the comic, one dedicated to each concept/superpower. My primary role in the project was as Lead Artist, designing the Protagonist and Antagonist and doing all poses and animations of those characters for the comic panels and minigames.", mediaType: "iframe", mediaSource: "games/Probabella/index.html" },
+            { id: "capstone-project", title: "Capstone Project", tags: ["collaborative", "art"], image: "images/thumbnails/CapstoneProject_Thumbnail.png", description: "My capstone project was a collaborative project working for a client--a local indie studio working on their first major project. Myself and two others worked as artists, drawing 2D attack animations for the main character. We were given descriptions of the animations desired, drew just keyframes for those animations in very low fidelity, and then gradually filled in more frames and eventually reached lineart by the end of our time with the studio, which they colored and adjusted if necessary from there. This project taught me a lot about working collaboratively on art for a client, rapidly ideating animations based off of client requests and working on different stages of the same animation as another group member. It also helped me become a lot better at style matching and capturing motion in my animations!", mediaType: "slideshow", mediaSource: ["GIFs/D1.gif","GIFs/D2.gif","GIFs/D3.gif","GIFs/M1.gif","GIFs/M2.gif","GIFs/M3.gif","GIFs/F1.gif","GIFs/F2.gif","GIFs/F3.gif","GIFs/K1.gif","GIFs/K2.gif","GIFs/K3.gif"] },
+            { id: "personal-art", title: "Personal Art", tags: ["individual", "art"], image: "images/thumbnails/PersonalArt_Thumbnail.jpg", description: "This is a collection of other miscellaneous art that I've done for fun! Specifically, pictured are unofficial regional variants and mega evolutions for Pokemon, A Glamour Bard and Shadow Monk I played recently in Dungeons and Dragons, and a custom spell card for my friend's Archfey Warlock in one of those same campaigns.", mediaType: "slideshow", mediaSource: ["images/ImageArtifacts/PersonalArt/alakazam_variant.jpg","images/ImageArtifacts/PersonalArt/delcatty_mega.png","images/ImageArtifacts/PersonalArt/corin_dnd.jpg","images/ImageArtifacts/PersonalArt/akane_dnd.png","images/ImageArtifacts/PersonalArt/spellcard_archfey.png"] }
+        ];
+
+        let activeFilter = "all";
+        let currentSlideIndex = 0;
+
+        // --- GAMEIFIED ACHIEVEMENT SYSTEM WITH CAPSTONE ---
+        const achievements = {
+            viewArtifacts: { id: "view-artifacts", title: "The Curator", unlocked: false },
+            viewResume: { id: "view-resume", title: "Background Check", unlocked: false },
+            changeTheme: { id: "change-theme", title: "Interior Decorator", unlocked: false },
+            openDetails: { id: "open-details", title: "Deep Dive", unlocked: false },
+            clickLogo: { id: "click-logo", title: "Secret Agent", unlocked: false },
+            useFilter: { id: "use-filter", title: "Targeted Search", unlocked: false },
+            completionist: { id: "completionist", title: "Completionist", unlocked: false } // Master Key
+        };
+
+        function initAchievements() {
+            Object.keys(achievements).forEach(key => {
+                if (localStorage.getItem(`ach_${achievements[key].id}`) === 'true') {
+                    achievements[key].unlocked = true;
+                }
+            });
+        }
+
+        function unlockAchievement(key) {
+            const ach = achievements[key];
+            if (!ach || ach.unlocked) return; 
+
+            ach.unlocked = true;
+            localStorage.setItem(`ach_${ach.id}`, 'true'); 
+
+            // Trigger Pop-up
+            const toast = document.getElementById('achievement-toast');
+            document.getElementById('toast-title').innerText = ach.title;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+
+            // --- META CHECKER FOR COMPLETIONIST STATUS ---
+            if (key !== 'completionist') {
+                // Filter out the completionist achievement itself, then check if all others are unlocked
+                const allOthersUnlocked = Object.keys(achievements)
+                    .filter(k => k !== 'completionist')
+                    .every(k => achievements[k].unlocked === true);
+
+                if (allOthersUnlocked) {
+                    // Slight delay so the previous toast can finish playing before the grand finale pops up!
+                    setTimeout(() => {
+                        unlockAchievement('completionist');
+                    }, 4000);
+                }
+            }
+        }
+
+        function updateAchievementsUI() {
+            Object.keys(achievements).forEach(key => {
+                const row = document.getElementById(`ach-${achievements[key].id}`);
+                if (row) {
+                    if (achievements[key].unlocked === true) {
+                        row.classList.add('unlocked');
+                    } else {
+                        row.classList.remove('unlocked');
+                    }
+                }
+            });
+        }
+
+        // --- PAGE SWAPPING LOGIC ---
+        function switchPage(pageId) {
+            // --- INJECT ACHIEVEMENT CHECKERS ---
+            if (pageId === 'artifacts') unlockAchievement('viewArtifacts');
+            if (pageId === 'resume') unlockAchievement('viewResume');
+            if (pageId === 'achievements') unlockAchievement('clickLogo'); // Earned by finding the secret panel!
+
+            const contentDiv = document.getElementById('main-content');
+            const template = document.getElementById(`page-${pageId}`);
+            
+            if (template) {
+                contentDiv.innerHTML = '';
+                contentDiv.appendChild(template.content.cloneNode(true));
+            }
+
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById(`nav-${pageId}`);
+            if (activeLink) activeLink.classList.add('active');
+
+            if (pageId === 'artifacts') {
+                renderGrid();
+            }
+
+            // CRITICAL FIX: Forces rows to look up their unlocked state the microsecond the dashboard renders
+            if (pageId === 'achievements') {
+                updateAchievementsUI();
+            }
+        }
+
+        // --- PROJECT GRID GENERATOR ---
+        function renderGrid() {
+            const gridContainer = document.getElementById('project-grid');
+            if (!gridContainer) return;
+            
+            gridContainer.innerHTML = ''; // Clear previous items
+
+            // Iterate through your 14 data nodes
+            projectsData.forEach(project => {
+                // Determine visibility status based on tags
+                if (activeFilter === 'all' || project.tags.includes(activeFilter)) {
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.onclick = () => openProject(project.id);
+                    
+                    // FIXED: Dynamic thumbnail image loading engine with structural fallback
+                    card.innerHTML = `
+                        <div class="project-thumbnail">
+                            ${project.image ? 
+                                `<img src="${project.image}" alt="${project.title} Thumbnail" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">` : ''
+                            }
+                            <div class="thumb-placeholder" style="display: ${project.image ? 'none' : 'block'}; font-size: 2.5rem; opacity: 0.5;">🎮</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>${project.title}</h3>
+                        </div>
+                    `;
+                    gridContainer.appendChild(card);
+                }
+            });
+        }
+
+        // --- CALCULATION FILTER RULE ---
+        function filterProjects(tag, buttonElement) {
+            if (tag !== 'all') unlockAchievement('useFilter');
+            
+            activeFilter = tag;
+            
+            // Swap active styling on tag choices
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+            
+            renderGrid();
+        }
+
+        // --- OVERLAY PROJECT OPEN DETAILS ---
+        function openProject(projectId) {
+            unlockAchievement('openDetails');
+
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project) return;
+
+            // Shift frame out into project viewport
+            switchPage('project-detail');
+
+            // Map title and text description
+            document.getElementById('detail-title').innerText = project.title;
+            document.getElementById('detail-text').innerText = project.description;
+
+            // --- DYNAMIC MEDIA ROUTER ---
+        const mediaBox = document.querySelector('.detail-media-box');
+        if (mediaBox && project.mediaType && project.mediaSource) {
+            mediaBox.innerHTML = ''; // Clear out the old placeholder text
+
+            if (project.mediaType === 'video') {
+                mediaBox.innerHTML = `
+                    <iframe src="${project.mediaSource}" 
+                            title="${project.title} Video Showcase" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            style="width: 100%; height: 100%; border-radius: 6px;">
+                    </iframe>`;
+            } 
+            else if (project.mediaType === 'image') {
+                mediaBox.innerHTML = `
+                    <img src="${project.mediaSource}" 
+                        alt="${project.title} Showcase" 
+                        style="width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 6px;">`;
+            } 
+            // --- NEW SLIDESHOW GENERATOR BLOCK ---
+            else if (project.mediaType === 'slideshow') {
+                currentSlideIndex = 0; // Reset to the first image every time it opens
+                
+                mediaBox.innerHTML = `
+                    <div class="slideshow-wrapper" style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <img id="slideshow-img" src="${project.mediaSource[0]}" alt="Slide 1" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                        
+                        <button class="slide-arrow prev-arrow" onclick="changeSlide('${project.id}', -1)" style="position: absolute; left: 15px; background: rgba(0,0,0,0.6); color: white; border: none; padding: 12px 16px; font-size: 1.2rem; cursor: pointer; border-radius: 50%; font-weight: bold; user-select: none;">‹</button>
+                        <button class="slide-arrow next-arrow" onclick="changeSlide('${project.id}', 1)" style="position: absolute; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; padding: 12px 16px; font-size: 1.2rem; cursor: pointer; border-radius: 50%; font-weight: bold; user-select: none;">›</button>
+                        
+                        <div id="slide-counter" style="position: absolute; bottom: 15px; background: rgba(0,0,0,0.6); color: white; padding: 4px 12px; font-size: 0.85rem; font-weight: bold; border-radius: 12px;">1 / ${project.mediaSource.length}</div>
+                    </div>`;
+            }
+            else if (project.mediaType === 'iframe') {
+             // FIXED: Changed scrolling="no" to scrolling="auto" to allow navigation
+            mediaBox.innerHTML = `
+            <iframe src="${project.mediaSource}" 
+                scrolling="auto" 
+                style="width: 100%; height: 100%; border: 0; border-radius: 6px;">
+            </iframe>`;
+            }
+            }
+
+            // Map your tag labels below the header
+            const tagsContainer = document.getElementById('detail-tags');
+            tagsContainer.innerHTML = '';
+            project.tags.forEach(t => {
+                const span = document.createElement('span');
+                span.className = 'detail-tag-label';
+                span.innerText = t.toUpperCase().replace('-', ' ');
+                tagsContainer.appendChild(span);
+            });
+        }
+
+        // --- SLIDESHOW CALCULATOR ENGINE ---
+        function changeSlide(projectId, direction) {
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project || !Array.isArray(project.mediaSource)) return;
+
+            // Increment or decrement the pointer index
+            currentSlideIndex += direction;
+
+            // Handle infinite loop wraparounds
+            if (currentSlideIndex >= project.mediaSource.length) {
+                currentSlideIndex = 0; // Loop back around to the first image
+            }
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = project.mediaSource.length - 1; // Loop back to the final image
+            }
+
+            // Instantly update the displayed asset source and the UI text tracker badge
+            document.getElementById('slideshow-img').src = project.mediaSource[currentSlideIndex];
+            document.getElementById('slide-counter').innerText = `${currentSlideIndex + 1} / ${project.mediaSource.length}`;
+        }
+
+        // --- THEME & COOKIE LOGIC (Unchanged) ---
+        function setTheme(themeName) {
+            // --- INJECT THEME ACHIEVEMENT CHECKER ---
+            if (themeName !== 'default') unlockAchievement('changeTheme');
+
+            if (themeName === 'default') {
+                document.documentElement.removeAttribute('data-theme');
+                document.cookie = "siteTheme=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            } else {
+                document.documentElement.setAttribute('data-theme', themeName);
+                document.cookie = "siteTheme=" + themeName + "; max-age=" + (365 * 24 * 60 * 60) + "; path=/;";
+            }
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // --- INIT ON LOAD ---
+        window.onload = () => {
+            initAchievements(); // <-- Add this initialization line first
+            switchPage('home');
+            const savedTheme = getCookie('siteTheme');
+            if (savedTheme) setTheme(savedTheme);
+        };
+    </script>
+
+</body>
+</html>
