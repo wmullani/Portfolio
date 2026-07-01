@@ -1,0 +1,669 @@
+/* --- THEME PALETTES (CSS Variables) --- */
+:root {
+    /* Default Dark Theme */
+    --bg-color: #000000;
+    --header-color: #111111;
+    --border-color: #222222;
+    --box-color: #e8e8e8;
+    --text-color: #333333;
+    --nav-text: #aaaaaa;
+    --nav-hover-text: #ffffff;
+    --accent-color: #cccccc;
+    --footer-text: #666666;
+}
+
+[data-theme="cyberpunk"] {
+    --bg-color: #1a0033;
+    --header-color: #0d001a;
+    --border-color: #ff007f;
+    --box-color: #2d0059;
+    --text-color: #00ffff;
+    --nav-text: #ff007f;
+    --nav-hover-text: #00ffff;
+    --accent-color: #ff007f;
+    --footer-text: #ff007f;
+}
+
+[data-theme="forest"] {
+    --bg-color: #1b261e;
+    --header-color: #131a15;
+    --border-color: #2d3b30;
+    --box-color: #eae7dc;
+    --text-color: #2d3b30;
+    --nav-text: #8fc1b5;
+    --nav-hover-text: #ffffff;
+    --accent-color: #50756c;
+    --footer-text: #50756c;
+}
+
+[data-theme="ocean"] {
+    --bg-color: #0b132b;
+    --header-color: #1c2541;
+    --border-color: #3a506b;
+    --box-color: #e0f2f1;
+    --text-color: #0b132b;
+    --nav-text: #5bc0be;
+    --nav-hover-text: #ffffff;
+    --accent-color: #3a506b;
+    --footer-text: #5bc0be;
+}
+
+[data-theme="light"] {
+    --bg-color: #f0f2f5;
+    --header-color: #ffffff;
+    --border-color: #dddddd;
+    --box-color: #ffffff;
+    --text-color: #333333;
+    --nav-text: #555555;
+    --nav-hover-text: #111111;
+    --accent-color: #888888;
+    --footer-text: #777777;
+}
+
+[data-theme="arcade"] {
+    --bg-color: #050505;          /* Deep Cabinet Black */
+    --header-color: #111111;
+    --border-color: #39ff14;      /* Neon Matrix Green */
+    --box-color: #1a1a1a;
+    --text-color: #39ff14;         /* CRT Monitor Green Text */
+    --nav-text: #888888;
+    --nav-hover-text: #39ff14;
+    --accent-color: #39ff14;
+    --footer-text: #39ff14;
+}
+
+/* Base Reset & Background */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header Layout */
+header {
+    background-color: var(--header-color);
+    padding: 0.75rem 2rem 0.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Navigation Container */
+nav {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo in Upper Left */
+.logo-img {
+    height: 75px;
+    width: auto;
+    align-self: flex-start;
+}
+
+/* Nav Links at the right side */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end; /* Locks all child containers cleanly along the baseline grid */
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a, .theme-link {
+    color: var(--nav-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding-bottom: 0.5rem;
+    transition: color 0.3s;
+    border-bottom: 2px solid transparent;
+    display: inline-block;
+    line-height: 1.2; /* Hard-coded identical line heights across elements */
+    margin: 0;
+}
+
+.nav-links a:hover, .nav-links a.active, .theme-dropdown:hover .theme-link {
+    color: var(--nav-hover-text);
+    border-bottom: 2px solid var(--nav-hover-text);
+}
+
+/* --- DROPDOWN CODE INTEGRATION --- */
+.theme-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Hidden popup palette list */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 2px;
+    background-color: var(--header-color);
+    border: 1px solid var(--border-color);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+    z-index: 100;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.dropdown-content button {
+    color: var(--nav-text);
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 12px 16px;
+    text-align: left;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-content button:hover {
+    background-color: var(--border-color);
+    color: var(--nav-hover-text);
+}
+
+/* Reveals the panel overlay strictly on hover */
+.theme-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* The "Layered" Floating Body Content */
+main {
+    flex: 1;
+    max-width: 1000px;
+    width: 90%;
+    margin: 3rem auto;
+    background-color: var(--box-color);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+}
+
+/* Footer */
+footer {
+    background-color: var(--header-color);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Content Dividers */
+hr {
+    border: 0;
+    border-top: 1px solid var(--accent-color);
+    margin: 1.5rem 0;
+}
+
+/* Home Page Grid Layout */
+.home-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.home-text, .home-image-container {
+    flex: 1;
+}
+
+/* Headshot Styling */
+.home-headshot {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .home-grid {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    
+    .home-headshot {
+        max-width: 250px;
+    }
+}
+
+/* --- RESUME REVISIONS --- */
+.resume-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.resume-left {
+    flex: 2.3;
+}
+
+.resume-right {
+    flex: 1;
+}
+
+.resume-section {
+    margin-bottom: 1.5rem;
+}
+
+.resume-section h2 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* The header line directly under the section H2 */
+.section-header-line {
+    border: 0;
+    border-top: 1px solid var(--accent-color);
+    margin: 0.75rem 0 1.25rem 0;
+}
+
+/* The divider line placed BETWEEN different sections */
+.section-divider {
+    border: 0;
+    border-top: 1px solid var(--accent-color);
+    margin: 2rem 0;
+    opacity: 0.5; /* Slightly softer so it doesn't fight the main headers */
+}
+
+/* Unified Font Style for degree names, job titles, and skill categories */
+.resume-entry-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: inherit;
+    display: inline-block;
+    margin-bottom: 0.25rem;
+}
+
+.resume-sub {
+    font-style: italic;
+    opacity: 0.8;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.resume-item p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.resume-item ul {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.resume-item li {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+}
+
+/* Contact Sidebar Container Box */
+.contact-card {
+    background-color: rgba(0, 0, 0, 0.04);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.contact-card p {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    word-break: break-word;
+}
+
+.contact-card a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.contact-card a:hover {
+    color: var(--nav-text);
+}
+
+/* Responsive Rules */
+@media (max-width: 768px) {
+    .resume-grid {
+        flex-direction: column;
+    }
+    
+    .resume-right {
+        width: 100%;
+    }
+    
+    .section-divider {
+        margin: 1.5rem 0;
+    }
+}
+
+/* ==========================================================================
+   ARTIFACTS MAIN GRID VIEW
+   ========================================================================== */
+
+.artifacts-container {
+    width: 100%;
+}
+
+/* Dynamic Filter Bar Formatting */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.filter-btn {
+    background-color: transparent;
+    color: var(--nav-text);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    color: var(--nav-hover-text);
+    border-color: var(--nav-hover-text);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+    background-color: var(--nav-hover-text);
+    color: var(--bg-color); /* Inverts colors against background for strong visibility */
+    border-color: var(--nav-hover-text);
+}
+
+/* 3-Column Responsive Layout Grid for your 14 Projects */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual Project Grid Tile */
+.project-card {
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--nav-hover-text);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Visual Thumbnail Box */
+.project-thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.thumb-placeholder {
+    font-size: 2.5rem;
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+}
+
+.project-card:hover .thumb-placeholder {
+    transform: scale(1.15); /* Subtle pop animation on hover */
+}
+
+/* Text Container inside Cards */
+.project-info {
+    padding: 1rem;
+}
+
+.project-info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Gracefully truncates long titles on tiny widths */
+}
+
+
+/* ==========================================================================
+   INDIVIDUAL DEEP-DIVE VIEWS
+   ========================================================================== */
+
+.detail-container {
+    width: 100%;
+}
+
+/* Back Button Alignment */
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--nav-text);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    color: var(--nav-hover-text);
+    border-bottom-color: var(--nav-hover-text);
+}
+
+.detail-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Inline Tag Chips under the project title */
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.detail-tag-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);
+    color: inherit;
+    opacity: 0.8;
+}
+
+/* Structural Split for Inside Project View */
+.detail-content-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+/* Gameplay Trailer / Embed Box Workspace */
+.detail-media-box {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-text {
+    font-style: italic;
+    font-size: 1rem;
+    opacity: 0.5;
+}
+
+.detail-description h2 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.detail-description p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Slideshow Arrow Interactive Tuning */
+.slide-arrow {
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.slide-arrow:hover {
+    background-color: var(--nav-hover-text) !important;
+    color: var(--bg-color) !important;
+}
+
+.slide-arrow:active {
+    transform: scale(0.9);
+}
+
+
+/* ==========================================================================
+   THEME ADAPTATION TWEEKS FOR CORE CONTRAST RULES
+   ========================================================================== */
+
+/* Dark Theme Specific Adjustments for Layout Blocks */
+[data-theme="cyberpunk"] .project-card,
+[data-theme="cyberpunk"] .detail-media-box,
+[data-theme="arcade"] .project-card,
+[data-theme="arcade"] .detail-media-box {
+    background-color: rgba(0, 0, 0, 0.4); /* High contrast backing for dark code schemes */
+}
+
+/* ==========================================================================
+   ACHIEVEMENT NOTIFICATION TOAST
+   ========================================================================== */
+.achievement-toast {
+    position: fixed;
+    bottom: -100px; /* Hidden below viewport initially */
+    right: 20px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 2px solid var(--nav-hover-text);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 9999;
+    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.achievement-toast.show {
+    bottom: 20px; /* Slides smoothly into position */
+}
+
+.toast-icon { font-size: 2rem; }
+.toast-text { display: flex; flex-direction: column; }
+.toast-label { font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; color: var(--nav-hover-text); }
+.toast-title { font-size: 1.1rem; margin: 0; font-weight: 700; }
+
+/* ==========================================================================
+   ACHIEVEMENTS TAB LAYOUT
+   ========================================================================== */
+.achievements-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.achievement-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /* Default Locked Grayed-out state rules */
+    filter: grayscale(1) opacity(0.4);
+    transition: all 0.4s ease;
+}
+
+/* Brightens up automatically when state swaps to unlocked */
+.achievement-row.unlocked {
+    filter: grayscale(0) opacity(1);
+    border-color: var(--nav-hover-text);
+    background: rgba(255,255,255,0.02);
+}
+
+.ach-badge {
+    font-size: 2.2rem;
+    background: rgba(0,0,0,0.1);
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ach-info h3 { margin: 0 0 0.25rem 0; font-size: 1.2rem; }
+.ach-info p { margin: 0; font-size: 0.95rem; opacity: 0.8; }
