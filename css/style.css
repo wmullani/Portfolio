@@ -725,13 +725,5 @@ hr {
     .detail-media-box iframe {
         -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile Safari */
     }
-
-    /* Keeps the theme text and dropdown arrow locked on the exact same line */
-    .theme-dropdown-toggle, 
-    #nav-themes {
-        white-space: nowrap !important;
-        display: inline-flex !important;
-        align-items: center;
-        gap: 4px; /* Gives the arrow a perfect tiny breathing room next to the text */
-    }
+    
 }
